@@ -75,7 +75,14 @@
                 throw new Error('executeScript requires exactly one of code or file to be specified');
             }
         },
-
+        //Gets cookie by Domain from the inAppWebView and adds it to the cordovaWebView.
+        getCookies: function(cookieDetails, cb) {
+            if(cookieDetails.url) {
+                exec(cb, null, "InAppBrowser", "getCookies", [cookieDetails.url, !!cb])
+            } else {
+                throw new Error('getCookie requires a url to be specified')
+            }
+        },
         insertCSS: function (injectDetails, cb) {
             if (injectDetails.code) {
                 exec(cb, null, 'InAppBrowser', 'injectStyleCode', [injectDetails.code, !!cb]);
